@@ -6,7 +6,6 @@ from django.contrib.auth.decorators import login_required
 from catalog.models import Book, Author, BookInstance
 
 
-@login_required
 def index(request):
     """View function for home page of site."""
 
@@ -39,7 +38,7 @@ def index(request):
 from django.views import generic
 
 
-class BookListView(LoginRequiredMixin, generic.ListView):
+class BookListView(generic.ListView):
     """Generic class-based view for a list of books."""
     model = Book
     paginate_by = 10
@@ -50,7 +49,7 @@ class BookDetailView(generic.DetailView):
     model = Book
 
 
-class AuthorsListView(LoginRequiredMixin, generic.ListView):
+class AuthorsListView(generic.ListView):
     model = Author
     paginate_by = 10
 
@@ -138,6 +137,7 @@ from django.urls import reverse_lazy
 
 from catalog.models import Author
 
+
 class AuthorCreate(PermissionRequiredMixin, CreateView):
     model = Author
     fields = ['first_name', 'last_name', 'date_of_birth', 'date_of_death']
@@ -153,6 +153,7 @@ class AuthorUpdate(PermissionRequiredMixin, UpdateView):
 class AuthorDelete(DeleteView):
     model = Author
     success_url = reverse_lazy('authors')
+
 
 # Classes created for the forms challenge
 class BookCreate(PermissionRequiredMixin, CreateView):

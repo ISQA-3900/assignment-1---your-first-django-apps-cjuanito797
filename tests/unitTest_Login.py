@@ -22,20 +22,15 @@ class ll_ATS(unittest.TestCase):
         elem.send_keys(user)
         elem = driver.find_element_by_id("id_password")
         elem.send_keys(pwd)
-        elem = driver.find_element_by_xpath("/html/body/div/div[2]/div/div[1]/div/form/div[3]/input").click()
         time.sleep(3)
+        elem.send_keys(Keys.RETURN)
         driver.get("http://127.0.0.1:8000")
-        time.sleep(3)
-        elem = driver.find_element_by_id("id_username")
-        elem.send_keys(user)
-        elem = driver.find_element_by_id("id_password")
-        elem.send_keys(pwd)
-        elem = driver.find_element_by_xpath("/html/body/div/div/div[2]/form/input[2]").click()
         time.sleep(3)
         # assert "Logged in"
         try:
             # attempt to find the 'Logout' button - if found, logged in
-            elem = driver.find_element_by_xpath("/html/body/div/div/div[1]/ul[1]/li[5]/a").click()
+            elem = driver.find_element_by_xpath("/html/body/div/div/div[1]/ul[1]/li[5]/a")
+
             assert True
 
         except NoSuchElementException:
